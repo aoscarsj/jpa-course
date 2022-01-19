@@ -15,9 +15,16 @@ public class Produto {
     private String descricao;
     private BigDecimal preco;
     private LocalDate dataCadastro = LocalDate.now();
-    // por padrao a JPA mapeia o enum por ordem, salvando sua posicao no enum (1,2,3...)
-    @Enumerated(EnumType.STRING)
+    // por padrao a JPA mapeia o enum por ordem, salvando sua posicao no enum (1,2,3...), para alterar => @Enumerated(EnumType.STRING)
+
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
 
     public Produto(String nome, String descricao, BigDecimal preco, Categoria categoria) {
         this.nome = nome;
